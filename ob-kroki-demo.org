@@ -1,0 +1,108 @@
+#+TITLE: A Demonstration and Test of ob-kroki.el
+#+AUTHOR: Shawn Murphy
+#
+# Dependencies
+#  kroki
+#    https://docs.kroki.io/kroki/setup/manual-install/
+#      # on debian/ubuntu
+#      #   sudo apt install kroki
+#      # on macos
+#      #   https://github.com/yuzutech/kroki-cli/releases/
+#      #   https://github.com/yuzutech/kroki-cli/releases/download/v0.4.0/kroki-cli_0.4.0_darwin_amd64.tar.gz
+#  ob-kroki.el
+#     ~/.emacs.d/ob-kroki.el
+#        This should have documentation prepared and submitted to OrgMode / Worg
+
+#+OPTIONS: toc:nil # put abstract before toc
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [a4paper]
+
+#+BEGIN_abstract
+A demonstration (and test) of ob-kroki.el
+#+END_abstract
+
+
+#+BEGIN_SRC kroki :file /tmp/he_says_she_says.png :cmdline --type plantuml :exports results
+title He says, she says
+Bob->Alice: He says
+note right of Alice: She thinks about it
+Alice->Bob: She says
+#+END_SRC
+
+#+BEGIN_SRC kroki :file /tmp/rock_paper_scissors.png :cmdline --type graphviz :exports results
+digraph rps {
+  rankdir="LR"
+  rock -> scissors -> paper -> rock;
+}
+#+END_SRC
+
+#+BEGIN_SRC kroki :file /tmp/truth_beauty.png :cmdline --type graphviz :exports results
+digraph bt {
+  rankdir="LR"
+  truth -> beauty -> truth;
+}
+#+END_SRC
+
+#+BEGIN_SRC kroki :file /tmp/dialectics.png :cmdline --type graphviz :exports results
+digraph dialectics {
+  rankdir="LR"
+  thesis -> synthesis;
+  antithesis -> synthesis;
+}
+#+END_SRC
+
+#+BEGIN_SRC kroki :file /tmp/usecase1.png :cmdline --type plantuml :exports results
+@startuml
+User << Human >>
+:Main Database: as MySql << Application >>
+(Start) << One Shot >>
+(Use the application) as (Use) << Main >>
+User -> (Start)
+User --> (Use)
+MySql --> (Use)
+@enduml
+#+END_SRC
+
+#+BEGIN_SRC kroki :file /tmp/nooron_system_diagram.png :cmdline --type plantuml :exports results
+@startuml
+package "Some Group" {
+HTTP - [First Component]
+[Another Component]
+}
+node "Other Groups" {
+FTP - [Second Component]
+[First Component] --> FTP
+}
+cloud {
+[Example 1]
+}
+database "MySql" {
+folder "This is my folder" {
+[Folder 3]
+}
+frame "Foo" {
+[Frame 4]
+}
+}
+[Another Component] --> [Example 1]
+[Example 1] --> [Folder 3]
+[Folder 3] --> [Frame 4]
+@enduml
+#+END_SRC
+
+
+#+BEGIN_SRC kroki :file /tmp/library_svgbob.svg :cmdline --type svgbob :exports results
+,-.
+`-'
+/|\
+ |
+/ \
+
+       .--.
+    .-(    )-.
+ .-(          )-.
+(                )
+ `-(          )-'
+    `-(    )-'
+       `--'
+#+END_SRC
