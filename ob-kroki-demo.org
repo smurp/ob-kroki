@@ -1,6 +1,16 @@
+# -*- org-confirm-babel-evaluate: nil -*- Suppress Babel prompts during export
 #+TITLE: A Demonstration and Test of ob-kroki.el
 #+AUTHOR: Shawn Murphy
-#
+
+#+OPTIONS: toc:nil # put abstract before toc
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [a4paper]
+
+
+#+BEGIN_abstract
+A demonstration (and test) of ob-kroki.el
+#+END_abstract
+
 # Dependencies
 #  kroki
 #    https://docs.kroki.io/kroki/setup/manual-install/
@@ -10,47 +20,64 @@
 #      #   https://github.com/yuzutech/kroki-cli/releases/
 #      #   https://github.com/yuzutech/kroki-cli/releases/download/v0.4.0/kroki-cli_0.4.0_darwin_amd64.tar.gz
 #  ob-kroki.el
-#     ~/.emacs.d/ob-kroki.el
+#     ~/.emacs.d/ob-kroki/ob-kroki.el
 #        This should have documentation prepared and submitted to OrgMode / Worg
 
-#+OPTIONS: toc:nil # put abstract before toc
-#+LATEX_CLASS: article
-#+LATEX_CLASS_OPTIONS: [a4paper]
-
-#+BEGIN_abstract
-A demonstration (and test) of ob-kroki.el
-#+END_abstract
 
 
-#+BEGIN_SRC kroki :file /tmp/he_says_she_says.png :cmdline --type plantuml :exports results
-title He says, she says
-Bob->Alice: He says
-note right of Alice: She thinks about it
-Alice->Bob: She says
+
+
+** GraphViz
+
+#+BEGIN_SRC kroki :file /tmp/ob-kroki-demo--lights.png :cmdline --type graphviz :exports both
+digraph lights {rankdir="LR"; green -> amber -> red -> green ; }
 #+END_SRC
 
-#+BEGIN_SRC kroki :file /tmp/rock_paper_scissors.png :cmdline --type graphviz :exports results
-digraph rps {
-  rankdir="LR"
-  rock -> scissors -> paper -> rock;
+** PlantUML
+
+*** SALT
+#+begin_src kroki :file /tmp/godeskgo_demo.png :cmdline --type plantuml :exports both
+@startsalt
+{+
+{* | File | Edit | Options | Window | Help | <&wifi> | <&timer> | <&battery-full> }
 }
+@endsalt
+#+end_src
+
+*** YAML
+#+BEGIN_SRC kroki :file /tmp/planuml_yaml_example.png :cmdline --type plantuml :exports both
+@startyaml
+fruit: Apple
+size: Large
+color:
+- Red
+  - Green
+@endyaml
 #+END_SRC
 
-#+BEGIN_SRC kroki :file /tmp/truth_beauty.png :cmdline --type graphviz :exports results
-digraph bt {
-  rankdir="LR"
-  truth -> beauty -> truth;
-}
+** MindMap
+#+BEGIN_SRC kroki :file /tmp/plantuml_mindmap_example.png :cmdline --type plantuml
+@startmindmap
++ Thing
+++ Stuff
++++ Peanut Butter
++++ Space
+-- Universe
+-- Galaxy
+--- Milky Way
++ Alphabets
+++ PIE
++++ Latin
++++ Greek
++++ Cyrilic
+-- Chinese
+--
+ Japanese
+@endmindmap
 #+END_SRC
 
-#+BEGIN_SRC kroki :file /tmp/dialectics.png :cmdline --type graphviz :exports results
-digraph dialectics {
-  rankdir="LR"
-  thesis -> synthesis;
-  antithesis -> synthesis;
-}
-#+END_SRC
 
+*** UML
 #+BEGIN_SRC kroki :file /tmp/usecase1.png :cmdline --type plantuml :exports results
 @startuml
 User << Human >>
@@ -63,6 +90,7 @@ MySql --> (Use)
 @enduml
 #+END_SRC
 
+*** UML
 #+BEGIN_SRC kroki :file /tmp/nooron_system_diagram.png :cmdline --type plantuml :exports results
 @startuml
 package "Some Group" {
@@ -90,19 +118,50 @@ frame "Foo" {
 @enduml
 #+END_SRC
 
-
-#+BEGIN_SRC kroki :file /tmp/library_svgbob.svg :cmdline --type svgbob :exports results
-,-.
-`-'
-/|\
- |
-/ \
-
-       .--.
-    .-(    )-.
- .-(          )-.
-(                )
- `-(          )-'
-    `-(    )-'
-       `--'
+*** openiconic
+#+BEGIN_SRC kroki :file /tmp/ob-kroki-demo_listopeniconic.png :cmdline --type plantuml :exports both
+@startuml
+listopeniconic
+@enduml
 #+END_SRC
+
+#+begin_src kroki :file /tmp/godeskgo_multimonitor.png :cmdline --type plantuml :exports both
+@startsalt
+{
+ [X] checkbox|[] checkbox
+ () radio | (X) radio
+ This is a text|[This is my button]|This is another text
+ "A field"|"Another long Field"|[A button]
+ <<folder
+ .X...XX...X.
+ .X...XX...X.
+ .X...XX...X.
+ .XXXXXXXXXX.
+ .X........X.
+ .X........X.
+ .X........X.
+ .X........X.
+ .XXXXXXXXXX.
+ ............
+ >>|<color:blue>other folder|<<folder>>
+^Droplist^
+}
+@endsalt
+#+end_src
+
+** svgbob
+*** OSX
+#+begin_src
+brew install inkscape # to render the svg output of svgbob to png
+#+end_src
+
+#+BEGIN_SRC kroki :file ob-kroki-demo-svgbob.svg :cmdline --type svgbob :exports both
+  .-------------.
+ / Advantages: /
+'-------------'
+#+END_SRC
+
+#+begin_src shell :async no
+  inkscape --export-filename ob-kroki-demo-svgbob.png ob-kroki-demo-svgbob.svg
+#+end_src
+[[file:ob-kroki-demo-svgbob.png]]

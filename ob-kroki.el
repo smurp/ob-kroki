@@ -45,10 +45,18 @@
 ;;
 ;; 4) there are no variables
 ;;
+;; Installation:
+;;   1) put the following in your .emacs
+;;
+;;     (if (file-exists-p "~/.emacs.d/ob-kroki/ob-kroki.el")
+;;       (let ((load-path load-path))
+;;         (add-to-list 'load-path "~/.emacs.d/ob-kroki")
+;;         (require 'ob-kroki)))
+;;   2) Install kroki-cli
+;;    from https://docs.kroki.io/kroki/setup/kroki-cli/
+;;       It enables command lines such as:
+;;          kroki convert simple.er --out-file out.png
 
-
-;; Example command lines (from https://docs.kroki.io/kroki/setup/kroki-cli/ )
-;;   kroki convert simple.er --out-file out.png
 
 ;; kroki convert --help
 ;; Convert text diagram to image
